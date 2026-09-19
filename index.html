@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مرکز امنیتی نمایشی</title>
+<style>
+body {
+  background: #050505;
+  color: #00ff41;
+  font-family: monospace;
+  padding: 20px;
+}
+.box {
+  border: 1px solid #00ff41;
+  padding: 20px;
+  max-width: 600px;
+  margin: 30px auto;
+}
+h2 { color: red; }
+.bar {
+  height: 25px;
+  background: #00ff41;
+  width: 0%;
+}
+.track {
+  background: #222;
+  border: 1px solid #00ff41;
+}
+#log { line-height: 2; }
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>⚠️ هشدار امنیتی</h2>
+<p>در حال اجرای بررسی نمایشی...</p>
+
+<div class="track">
+<div class="bar" id="bar"></div>
+</div>
+
+<p id="percent">۰٪</p>
+<div id="log"></div>
+</div>
+
+<script>
+let n = 0;
+let messages = [
+"🔍 اسکن نمایشی سیستم...",
+"📡 بررسی اتصال شبکه...",
+"💻 بررسی وضعیت دستگاه...",
+"🔐 تحلیل امنیتی نمایشی...",
+"⚠️ بررسی تکمیل شد..."
+];
+
+let timer = setInterval(() => {
+  n++;
+  document.getElementById("bar").style.width = n + "%";
+  document.getElementById("percent").innerText = n + "٪";
+
+  if (n % 20 === 0) {
+    let msg = messages[n / 20 - 1];
+    if (msg) {
+      let line = document.createElement("div");
+      line.textContent = msg;
+      document.getElementById("log").appendChild(line);
+    }
+  }
+
+  if (n >= 100) clearInterval(timer);
+}, 100);
+</script>
+
+</body>
+</html>
