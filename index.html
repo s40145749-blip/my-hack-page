@@ -1,79 +1,83 @@
+<div id="hackerIntro">
+  <div id="code"></div>
+</div>
 
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>مرکز امنیتی نمایشی</title>
+<div id="hackedSticker">☠ HACKED ☠</div>
+
 <style>
-body {
-  background: #050505;
+#hackerIntro {
+  position: fixed;
+  inset: 0;
+  background: #000;
   color: #00ff41;
+  z-index: 999999;
+  overflow: hidden;
   font-family: monospace;
-  padding: 20px;
+  font-size: 16px;
+  padding: 25px;
 }
-.box {
-  border: 1px solid #00ff41;
-  padding: 20px;
-  max-width: 600px;
-  margin: 30px auto;
+
+#code {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  animation: scrollCode 7s linear forwards;
 }
-h2 { color: red; }
-.bar {
-  height: 25px;
-  background: #00ff41;
-  width: 0%;
+
+@keyframes scrollCode {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-120vh); }
 }
-.track {
-  background: #222;
-  border: 1px solid #00ff41;
+
+#hackedSticker {
+  display: none;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  z-index: 1000000;
+  padding: 20px 35px;
+  background: #8b0000;
+  color: white;
+  border: 4px solid white;
+  border-radius: 12px;
+  font: bold 42px Arial;
+  box-shadow: 0 0 35px red;
+  animation: scary 0.25s infinite alternate;
 }
-#log { line-height: 2; }
+
+@keyframes scary {
+  from { transform: translate(-50%, -50%) rotate(-8deg) scale(1); }
+  to { transform: translate(-50%, -50%) rotate(8deg) scale(1.08); }
+}
 </style>
-</head>
-<body>
-
-<div class="box">
-<h2>⚠️ هشدار امنیتی</h2>
-<p>در حال اجرای بررسی نمایشی...</p>
-
-<div class="track">
-<div class="bar" id="bar"></div>
-</div>
-
-<p id="percent">۰٪</p>
-<div id="log"></div>
-</div>
 
 <script>
-let n = 0;
-let messages = [
-"🔍 اسکن نمایشی سیستم...",
-"📡 بررسی اتصال شبکه...",
-"💻 بررسی وضعیت دستگاه...",
-"🔐 تحلیل امنیتی نمایشی...",
-"⚠️ بررسی تکمیل شد..."
+const lines = [
+  "INITIALIZING SYSTEM...",
+  "ACCESSING MAIN SERVER...",
+  ">>> CONNECTION ESTABLISHED",
+  "BYPASSING SECURITY...",
+  "ENCRYPTION DETECTED",
+  "CRACKING FIREWALL...",
+  "ACCESS GRANTED",
+  "DOWNLOADING DATA...",
+  "SYSTEM COMPROMISED",
+  "WARNING: UNKNOWN USER",
+  "ROOT ACCESS: GRANTED",
+  "████████████████████",
+  "YOU ARE BEING WATCHED...",
+  "ERROR 666",
+  "HACK COMPLETE..."
 ];
 
-let timer = setInterval(() => {
-  n++;
-  document.getElementById("bar").style.width = n + "%";
-  document.getElementById("percent").innerText = n + "٪";
+let code = "";
+for (let i = 0; i < 25; i++) {
+  code += lines[Math.floor(Math.random() * lines.length)] + "\n";
+}
+document.getElementById("code").textContent = code;
 
-  if (n % 20 === 0) {
-    let msg = messages[n / 20 - 1];
-    if (msg) {
-      let line = document.createElement("div");
-      line.textContent = msg;
-      document.getElementById("log").appendChild(line);
-    }
-  }
-
-  if (n >= 100) clearInterval(timer);
-}, 100);
+setTimeout(() => {
+  document.getElementById("hackerIntro").style.display = "none";
+  document.getElementById("hackedSticker").style.display = "block";
+}, 7000);
 </script>
-
-</body>
-<div class="hacked-sticker">⚠️ HACKED ⚠️</div>
-<div class="hack-text">SYSTEM COMPROMISED</div>
-</html>
